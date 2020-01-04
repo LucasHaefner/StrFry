@@ -36,12 +36,12 @@ def table_to_string(table):
 	return table
 
 
-def row(columns, row_num=0):
+def row(list, row_num=0, headers=None):
 	"""
 	Takes:
 		row_num : int
 			the current row to render
-		columns : list of lists
+		list : list of lists
 			elements for each row
 		headers : list (default None)
 			a title string for each column
@@ -53,34 +53,30 @@ def row(columns, row_num=0):
 	output = []
 	width = []
 	padding = 1
-	table = table_to_string(columns)
-	for index, row in enumerate(table):
+	columns = table_to_string(list)
+	print('list: ', list)
+	print('columns: ', columns)
+	for index, row in enumerate(columns):
 
 		width.append(len(max(row, key=len)))
 
 	width = max(width) + padding
 
-	for row in table:
+	for row in columns:
 
 		for index, element in enumerate(row):
 
 			row[index] = element.ljust(width, '-')
 
 
-	return table[row_num]
+	return columns[row_num]
 
 
-def table(columns):
+def table(list, headers=None):
 	"""
 	Takes:
-		columns : list of lists
+		list : list of lists
 			elements for each row
-		separators : dict
-			keys holds chars
-				char to separate columns
-			values holds aligmnents
-				True for left justified
-				False for center justified
 		headers : list (default None)
 			a title string for each column
 	Returns:
