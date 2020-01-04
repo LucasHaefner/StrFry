@@ -27,9 +27,9 @@ def separate(repeat=1, chars=':', alignments=True):
 	"""
 	separators = {}
 
-	for i in range(length):
+	for i in range(repeat):
 
-		separators[chars] = aligmnents
+		separators[str(chars)] = alignments
 
 	return separators
 
@@ -51,18 +51,26 @@ def row(row_num, columns, separators, headers=None):
 			a title string for each column
 	Returns:
 		rows : list
-			tuple(s)
+			list(s)
 				elements for each column
 	"""
-	column_set = [columns.keys(), columns.values()] if type(columns) == dict else columns
+	if type(columns) == dict:
+
+		columns_new = []
+
+		for i in columns.index():
+
+			columns_new.append(columns.keys()[i], columns.values()[i])
+
+		columns = dict(columns_new)
 
 	margin = 1
-	row = ()
+	row = []
 
 	for index, c in enumerate(columns):
 
-		width = len(max(column_set(index), key=len)) + margin
-		row.append(str(c).ljust(width, separators.keys()[row_num]))
+		width = len(max(columns, key=len)) + margin
+		row += str(c).ljust(width, list(separators.keys())[row_num])
 
 	return row
 
