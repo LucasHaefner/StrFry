@@ -36,7 +36,7 @@ def table_to_string(table):
 	return table
 
 
-def row(columns, row_num):
+def row(columns, row_num=0):
 	"""
 	Takes:
 		row_num : int
@@ -52,14 +52,16 @@ def row(columns, row_num):
 	"""
 	output = []
 	width = []
-	margin = 1
+	padding = 1
 	columns = table_to_string(columns)
 
 	for index, row in enumerate(columns):
 
 		width.append(len(max(row, key=len)))
+		print('Width: ', row, width)
 
-	width = max(width) + margin
+	width = max(width) + padding
+	print('Width: ', width)
 
 	for row in columns:
 
@@ -67,7 +69,7 @@ def row(columns, row_num):
 
 			row[index] = element.ljust(width, '-')
 
-
+		
 	return columns[row_num]
 
 
