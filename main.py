@@ -53,24 +53,21 @@ def row(columns, row_num=0):
 	output = []
 	width = []
 	padding = 1
-	columns = table_to_string(columns)
-
-	for index, row in enumerate(columns):
+	table = table_to_string(columns)
+	for index, row in enumerate(table):
 
 		width.append(len(max(row, key=len)))
-		print('Width: ', row, width)
 
 	width = max(width) + padding
-	print('Width: ', width)
 
-	for row in columns:
+	for row in table:
 
 		for index, element in enumerate(row):
 
 			row[index] = element.ljust(width, '-')
 
-		
-	return columns[row_num]
+
+	return table[row_num]
 
 
 def table(columns):
