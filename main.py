@@ -7,12 +7,12 @@ A simple module for creating human-readable tables in Python
 
 # imports
 
-import string
+# import string
 
 
 # body
 
-def separate(chars, alignments):
+def separate(repeat=1, chars=':', alignments=True):
 	"""
 	Takes:
 		chars : tuple
@@ -25,7 +25,11 @@ def separate(chars, alignments):
 			keys holds chars
 			values holds alignments
 	"""
-	separators = dict(zip(chars, alignment))
+	separators = {}
+
+	for i in range(length):
+
+		separators[chars] = aligmnents
 
 	return separators
 
@@ -88,3 +92,9 @@ def table(columns, separators, headers=None):
 
 	return table
 
+
+columns = [('ROW_1', 1), ('ROW_2', 2), ('ROW_3', 3)]
+separators = separate(2)
+
+print('SEPARATE: ', separators, '\n')
+print('ROW: ', row(0, columns, separators))
