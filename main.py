@@ -13,11 +13,13 @@ def list_to_string(list):
 		list : list
 			list with all string elements
 	"""
+	string_list = []
+
 	for index, element in enumerate(list):
 
-		list[index] = str(element)
+		string_list.append(str(element))
 
-	return list
+	return string_list
 
 
 def table_to_string(table):
@@ -29,11 +31,13 @@ def table_to_string(table):
 		table : list of lists
 			list(s) with all string elements
 	"""
+	string_table = []
+
 	for index, list in enumerate(table):
 
-		table[index] = list_to_string(list)
+		string_table.append(list_to_string(list))
 
-	return table
+	return string_table
 
 
 def row(list, row_num=0, headers=None):
@@ -54,8 +58,7 @@ def row(list, row_num=0, headers=None):
 	width = []
 	padding = 1
 	columns = table_to_string(list)
-	print('list: ', list)
-	print('columns: ', columns)
+
 	for index, row in enumerate(columns):
 
 		width.append(len(max(row, key=len)))
