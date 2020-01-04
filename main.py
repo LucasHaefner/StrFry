@@ -4,17 +4,37 @@
 A simple module for creating human-readable tables in Python
 """
 
+def list_to_string(list):
+	"""
+	Takes:
+		list : list
+			the list to convert
+	Returns:
+		list : list
+			list with all string elements
+	"""
+	for index, element in enumerate(list):
 
-# imports
+		list[index] = str(element)
 
-# import string
+	return list
 
 
-# body
+def table_to_string(table):
+	"""
+	Takes:
+		table : list of lists
+			the table to convert
+	Returns:
+		table : list of lists
+			list(s) with all string elements
+	"""
+	for index, list in enumerate(table):
 
-"""
-table = list of lists [[],[],[]]
-"""
+		table[index] = list_to_string(list)
+
+	return table
+
 
 def row(row_num, columns, headers=None):
 	"""
@@ -26,19 +46,16 @@ def row(row_num, columns, headers=None):
 		headers : tuple (default None)
 			a title string for each column
 	Returns:
-		rows : list
+		rows : list-o'-lists
 			list(s)
 				elements for each column
 	"""
 	output = []
 	width = []
 	margin = 1
+	columns = table_to_string(columns)
 
 	for index, row in enumerate(columns):
-
-		for index, element in enumerate(row):
-
-			row[index] = str(element)
 
 		width.append(len(max(row, key=len)))
 
