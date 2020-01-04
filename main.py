@@ -36,17 +36,17 @@ def table_to_string(table):
 	return table
 
 
-def row(row_num, columns, headers=None):
+def row(columns, row_num):
 	"""
 	Takes:
 		row_num : int
 			the current row to render
-		columns : iterable
+		columns : list of lists
 			elements for each row
-		headers : tuple (default None)
+		headers : list (default None)
 			a title string for each column
 	Returns:
-		rows : list-o'-lists
+		rows : list of lists
 			list(s)
 				elements for each column
 	"""
@@ -67,14 +67,14 @@ def row(row_num, columns, headers=None):
 
 			row[index] = element.ljust(width, '-')
 
-		
-	return columns
+
+	return columns[row_num]
 
 
-def table(columns, separators, headers=None):
+def table(columns):
 	"""
 	Takes:
-		columns : iterable
+		columns : list of lists
 			elements for each row
 		separators : dict
 			keys holds chars
@@ -82,22 +82,21 @@ def table(columns, separators, headers=None):
 			values holds aligmnents
 				True for left justified
 				False for center justified
-		headers : tuple (default None)
+		headers : list (default None)
 			a title string for each column
 	Returns:
 		table : string
-			columns and aligned rows in a readable table
+			columns and rows aligned in a readable table
 	"""
 	table = ''
 
-	for i in columns:
+	for i in range(len(columns)):
 
-		table += row(i, columns, separators, headers)
+		table += str(row(columns, i)) + '\n'
 
 	return table
 
 
 columns = [['ROW_1', 1], ['ROW_2', 2], ['ROW_3', 3]]
 
-print('ROW: ', row(0, columns))
-# print('SEPARATE: ', separators, '\n')
+print(table(columns))
