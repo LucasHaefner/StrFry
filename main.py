@@ -1,37 +1,90 @@
+# ...StrFry/main.py
+
 """
 A simple module for creating human-readable tables in Python
 """
 
-class strfry:
 
-	def table(columns=1, *rows, separator=' ') # wip
-		"""
-		Takes int columns, tuple of dicts rows, string separator
-		Returns rows in dict form
-		"""
-		 
-	
-	def align(*tables): # wip
-		"""
-		Takes rows in dict form
-		Returns string in table format
-		"""
-		columns = 
+# imports
 
-		keys = list(self.__dict__.keys())
-		values = list(self.__dict__.values())
-		width = len(max(keys, key=len)) + separator + 1
+import string
 
-		for key in keys:
-			column = (key + ':').ljust(width, '-')
-			print('c', column)
 
-		table = dict(zip(column, values))
-		output = ''
-		print('table: ', table)
-		
-		for key, value in table:
+# body
 
-			output.append(f'{dict.keys[key]} {dict.values[value]}\n')
+def separate(chars, alignments):
+	"""
+	Takes:
+		chars : tuple
+			char to separate columns
+		alignments : tuple
+			True for left justified
+			False for center justified
+	Returns:
+		separators : dict
+			keys holds chars
+			values holds alignments
+	"""
+	separators = dict(zip(chars, alignment))
 
-		return output
+	return separators
+
+
+def row(row_num, columns, separators, headers=None):
+	"""
+	Takes:
+		row_num : int
+			the current row to render
+		columns : iterable
+			elements for each row
+		separators : dict
+			keys holds chars
+				char to separate columns
+			values holds aligmnents
+				True for left justified
+				False for center justified
+		headers : tuple (default None)
+			a title string for each column
+	Returns:
+		rows : list
+			tuple(s)
+				elements for each column
+	"""
+	column_set = [columns.keys(), columns.values()] if type(columns) == dict else columns
+
+	margin = 1
+	row = ()
+
+	for index, c in enumerate(columns):
+
+		width = len(max(column_set(index), key=len)) + margin
+		row.append(str(c).ljust(width, separators.keys()[row_num]))
+
+	return row
+
+
+def table(columns, separators, headers=None):
+	"""
+	Takes:
+		columns : iterable
+			elements for each row
+		separators : dict
+			keys holds chars
+				char to separate columns
+			values holds aligmnents
+				True for left justified
+				False for center justified
+		headers : tuple (default None)
+			a title string for each column
+	Returns:
+		table : string
+			columns and aligned rows in a readable table
+	"""
+	table = ''
+
+	for i in columns:
+
+		table += row(i, columns, separators, headers)
+
+	return table
+
