@@ -66,9 +66,8 @@ def row(row_num, columns, headers=None):
 		for index, element in enumerate(row):
 
 			row[index] = element.ljust(width, '-')
-			print('Row2: ', row)
 
-
+		
 	return columns
 
 
