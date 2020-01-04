@@ -12,41 +12,17 @@ A simple module for creating human-readable tables in Python
 
 # body
 
-def separate(repeat=1, chars=':', alignments=True):
-	"""
-	Takes:
-		chars : tuple
-			char to separate columns
-		alignments : tuple
-			True for left justified
-			False for center justified
-	Returns:
-		separators : dict
-			keys holds chars
-			values holds alignments
-	"""
-	separators = {}
+"""
+table = list of lists [[],[],[]]
+"""
 
-	for i in range(repeat):
-
-		separators[str(chars)] = alignments
-
-	return separators
-
-
-def row(row_num, columns, separators, headers=None):
+def row(row_num, columns, headers=None):
 	"""
 	Takes:
 		row_num : int
 			the current row to render
 		columns : iterable
 			elements for each row
-		separators : dict
-			keys holds chars
-				char to separate columns
-			values holds aligmnents
-				True for left justified
-				False for center justified
 		headers : tuple (default None)
 			a title string for each column
 	Returns:
@@ -54,25 +30,29 @@ def row(row_num, columns, separators, headers=None):
 			list(s)
 				elements for each column
 	"""
-	if type(columns) == dict:
-
-		columns_new = []
-
-		for i in columns.index():
-
-			columns_new.append(columns.keys()[i], columns.values()[i])
-
-		columns = dict(columns_new)
-
+	output = []
+	width = []
 	margin = 1
-	row = []
 
-	for index, c in enumerate(columns):
+	for index, row in enumerate(columns):
 
-		width = len(max(columns, key=len)) + margin
-		row += str(c).ljust(width, list(separators.keys())[row_num])
+		for index, element in enumerate(row):
 
-	return row
+			row[index] = str(element)
+
+		width.append(len(max(row, key=len)))
+
+	width = max(width) + margin
+
+	for row in columns:
+
+		for index, element in enumerate(row):
+
+			row[index] = element.ljust(width, '-')
+			print('Row2: ', row)
+
+
+	return columns
 
 
 def table(columns, separators, headers=None):
@@ -101,8 +81,7 @@ def table(columns, separators, headers=None):
 	return table
 
 
-columns = [('ROW_1', 1), ('ROW_2', 2), ('ROW_3', 3)]
-separators = separate(2)
+columns = [['ROW_1', 1], ['ROW_2', 2], ['ROW_3', 3]]
 
-print('SEPARATE: ', separators, '\n')
-print('ROW: ', row(0, columns, separators))
+print('ROW: ', row(0, columns))
+# print('SEPARATE: ', separators, '\n')
