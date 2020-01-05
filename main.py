@@ -12,19 +12,7 @@ class Table:
 
 	def normalize(self):
 
-		normal_table = []
-
-		for index, list in enumerate(table.):
-
-			normal_list = []
-
-			for index, element in enumerate(list):
-
-				normal_list.append(str(element))
-
-		normal_table.append(normal_list)
-
-		return normal_table
+		return {sort: [[str(i) for i in list] for list in nest] for sort, nest in self.input}
 
 	# def flip(self):
 
@@ -42,4 +30,4 @@ print(table.normalize())
 
 # implement separators for each column
 # allow different width for each column
-{k: [[str(j) for j in i] for i in v] for k, v in the_dictionary}
+# {k: [[str(j) for j in i] for i in v] for k, v in the_dictionary}
