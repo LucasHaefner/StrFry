@@ -29,30 +29,31 @@ class Table:
         for index, list in enumerate(self.table):
             
             group = []
+
             for list in self.table:
                 
-                # print('element: ', list[index])
                 group.append(list[index])
-                print('list[index]: ', list[index])
 
             set.append(group)
-            print('group[index]: ', group)
+            
+        return set
 
     def flip(self):
         
         if self.sort == 'rows':
 
-            self.table = flip_by_columns(self.table)
+            self.table = self.flip_by_columns()
+            self.sort = 'columns'
 
         elif self.sort == 'columns':
 
-            self.table = flip_by_rows(self.table)
+            self.table = self.flip_by_rows()
+            self.sort = 'rows'
 
         else:
 
             raise Exception(self.errors['sort'])
-        # self.table = [flip_by_columns(self.table) if self.sort == 'rows' else flip_by_rows(self.table) if self.sort == 'columns']
-
+        
         return self.table
 
 
@@ -62,8 +63,8 @@ my_table = [['THIS', 'IS1', 'ROW1'],
             ['IS'  , 'IS2', 'ROW2'],
             ['COL' , 'IS3', 'ROW3']]
 
-# print(table(columns))
-table = Table(my_table, 'row')
+table = Table(my_table, 'rows')
+print(table.flip())
 print(table.flip())
 
 # implement separators for each column
