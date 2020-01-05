@@ -46,8 +46,8 @@ class Table:
 
         elif self.sort == 'columns':
 
-            self.table = rows(self.table)
-            
+            self.table = flip_by_rows(self.table)
+
         else:
 
             raise Exception(self.errors['sort'])
@@ -64,7 +64,6 @@ my_table = [['THIS', 'IS1', 'ROW1'],
 
 # print(table(columns))
 table = Table(my_table, 'row')
-print(table.flip())
 print(table.flip())
 
 # implement separators for each column
