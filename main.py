@@ -90,7 +90,8 @@ def table(list, headers=None):
 
 	for i in range(len(columns)):
 
-		table += str(row(columns, i)) + '\n'
+		# table += f'{row(columns, i)}\n'
+		table = table.join(f'{row(columns, i)}\n')
 
 	return table
 
