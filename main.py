@@ -31,9 +31,9 @@ class Table:
 
 	# def create(self):
 
-my_table = {'group_col':[['ROW_1', 1, '#1'],
-						 ['ROW_2', 2, '#commffffffffffffffffent'],
-						 ['ROW_3', 3, '#oo']]
+my_table = {'group_col':[['THIS', 'IS1', 'ROW1'],
+						 ['IS'  , 'IS2', 'ROW2'],
+						 ['COL' , 'IS3', 'ROW3']]
 		   }
 
 # print(table(columns))
@@ -42,3 +42,4 @@ print(table.normalize())
 
 # implement separators for each column
 # allow different width for each column
+{k: [[str(j) for j in i] for i in v] for k, v in the_dictionary}
