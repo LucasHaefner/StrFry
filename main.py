@@ -12,16 +12,18 @@ class Table:
 
 	def normalize(self):
 
-		return {sort: [[str(i) for i in list] for list in nest] for sort, nest in self.input}
+		self.input = {sort: [[str(i) for i in list] for list in nest] for sort, nest in self.input.items()}
 
-	# def flip(self):
+		return self.input
+
+	def flip(self):
 
 
 	# def create(self):
 
-my_table = {'group_col':[['THIS', 'IS1', 'ROW1'],
-						 ['IS'  , 'IS2', 'ROW2'],
-						 ['COL' , 'IS3', 'ROW3']]
+my_table = {'col':[['THIS', 'IS1', 'ROW1'],
+				   ['IS'  , 'IS2', 'ROW2'],
+				   ['COL' , 'IS3', 'ROW3']]
 		   }
 
 # print(table(columns))
