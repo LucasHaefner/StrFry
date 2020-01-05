@@ -32,4 +32,3 @@ print(table.normalize())
 
 # implement separators for each column
 # allow different width for each column
-# {k: [[str(j) for j in i] for i in v] for k, v in the_dictionary}
