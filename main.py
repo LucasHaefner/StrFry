@@ -6,11 +6,11 @@ A simple module for creating human-readable tables in Python
 
 class Table:
 
-    def __init__(self, table, sort='row'):
+    def __init__(self, table, sort='rows'):
 
         self.table = table          
         self.sort = sort
-        self.errors = {'sort':f'Invalid sorting key \'{self.sort}\'. Use \'row\' or \'col\'.'}
+        self.errors = {'sort':f'Invalid sorting key \'{self.sort}\'. Use \'rows\' or \'columns\'.'}
 
 
     def normalize(self):
@@ -51,7 +51,8 @@ my_table = [['THIS', 'IS1', 'ROW1'],
             ['IS'  , 'IS2', 'ROW2'],
             ['COL' , 'IS3', 'ROW3']]
 
-table = Table(my_table, 'rows')
+table = Table(my_table)
 [print(table.flip()) for _ in range(3)]
 
 # implement (different) separators for each column
+
