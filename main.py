@@ -64,8 +64,6 @@ my_table = [['THIS', 'IS1', 'ROW1'],
             ['COL' , 'IS3', 'ROW3']]
 
 table = Table(my_table, 'rows')
-print(table.flip())
-print(table.flip())
+[print(table.flip()) for _ in range(3)]
 
-# implement separators for each column
-# allow different width for each column
+# implement (different) separators for each column
