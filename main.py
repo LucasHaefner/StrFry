@@ -6,22 +6,32 @@ A simple module for creating human-readable tables in Python
 
 class Table:
 
-    def __init__(self, table, separator='', sort='rows'):
+    def __init__(self, table, separators=({':':False}), sort='rows'):
 
         self.table = table
-        self.separator = separator
+        self.separators = separators
         self.sort = sort
         self.errors = {'sort':f'Invalid sorting key \'{self.sort}\'. Use \'rows\' or \'columns\'.'}
 
-        if self.sort != 'rows' and self.sort != 'columns':
+        if self.sort == 'rows':
+
+            [separators.append()[:1] for _ in len(self.table)] if len(self.separators) < len(self.table)
+
+        elif self.sort == 'columns':
+
+            [separators.append()[:1] for _ in len(flip(self.table))] if len(self.separators) < len(flip(self.table))
+
+        else:
 
             raise ValueError(self.errors[sort])
 
+    def separate(self, chars, alignments):
+
+        return [dict(zip(chars(i), alignments(i))) for i in min(chars, alignment)]
+
     def normalize(self):
 
-        self.table = [[str(i) for i in list] for list in self.table]
-
-        return self.table
+        return [[str(i) for i in list] for list in self.table]
 
     def flip(self):
         
@@ -37,13 +47,13 @@ class Table:
 
             set.append(group)
 
-        self.table = set
         self.sort = ['rows' if self.sort == 'columns' else 'columns']
 
-        return self.table
+        return set
 
     def align(self):
 
+        string = ''
         width = []
         padding = 1
 
@@ -62,9 +72,9 @@ class Table:
 
         for i in range(len(self.table)):
 
-            output = (self.separator + ' ').join(self.table[i])
+            string += (next(iter(self.separators[i])) + ' ').join(self.table[i])
 
-        return output
+        return string
 
 
     # def saute(self):
