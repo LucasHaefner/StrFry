@@ -6,9 +6,10 @@ A simple module for creating human-readable tables in Python
 
 class Table:
 
-    def __init__(self, table, sort='rows'):
+    def __init__(self, table, separator='', sort='rows'):
 
-        self.table = table          
+        self.table = table
+        self.separator = separator
         self.sort = sort
         self.errors = {'sort':f'Invalid sorting key \'{self.sort}\'. Use \'rows\' or \'columns\'.'}
 
@@ -41,21 +42,46 @@ class Table:
 
         return self.table
 
-    def saute(self):
+    def align(self):
 
-        self.normalize()
+        width = []
+        padding = 1
 
-        string = ''
+        for index, row in enumerate(self.table):
+
+            width.append(len(max(row, key=len)))
+
+        print('Width: ', width)
+        width = [i + padding for i in width]
 
         for list in self.table:
 
-            for element in list:
+            for index, element in enumerate(list):
 
-                string += element
+                element = element.ljust(width[index])
 
-            string += '\n'
+        for i in range(len(self.table)):
 
-        return string
+            output = (self.separator + ' ').join(self.table[i])
+
+        return output
+
+
+    # def saute(self):
+
+    #     self.normalize()
+
+    #     string = ''
+
+    #     for list in self.table:
+
+    #         for element in list:
+
+    #             string += element
+
+    #         string += '\n'
+
+    #     return string
 
 
     # def create(self):
@@ -64,8 +90,8 @@ my_table = [['THIS', 'IS1', 'ROW1'],
             ['IS'  , 'IS2', 'ROW2'],
             ['COL' , 'IS3', 'ROW3']]
 
-table = Table(my_table)
+table = Table(my_table, ':')
 # [print(table.flip()) for _ in range(3)]
-print(table.saute())
+print(table.align())
 
 # implement (different) separators for each column
