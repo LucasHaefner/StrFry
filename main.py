@@ -12,6 +12,9 @@ class Table:
         self.sort = sort
         self.errors = {'sort':f'Invalid sorting key \'{self.sort}\'. Use \'rows\' or \'columns\'.'}
 
+        if self.sort != 'rows' and self.sort != 'columns':
+
+            raise ValueError(self.errors[sort])
 
     def normalize(self):
 
@@ -21,26 +24,20 @@ class Table:
 
     def flip(self):
         
-        if self.sort == 'rows' or self.sort == 'columns':
+        set = []
 
-            set = []
-
-            for index, list in enumerate(self.table):
+        for index, list in enumerate(self.table):
             
-                group = []
+            group = []
 
-                for list in self.table:
+            for list in self.table:
                 
-                    group.append(list[index])
+                group.append(list[index])
 
             set.append(group)
 
-            self.table = set
-            self.sort = ['rows' if self.sort == 'columns' else 'columns']
-
-        else:
-
-            raise Exception(self.errors['sort'])
+        self.table = set
+        self.sort = ['rows' if self.sort == 'columns' else 'columns']
 
         return self.table
 
@@ -55,4 +52,3 @@ table = Table(my_table)
 [print(table.flip()) for _ in range(3)]
 
 # implement (different) separators for each column
-
