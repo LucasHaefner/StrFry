@@ -18,7 +18,7 @@ class Table:
 
     def normalize(self):
 
-        self.table = {sort: [[str(i) for i in list] for list in nest] for sort, nest in self.table.items()}
+        self.table = [[str(i) for i in list] for list in self.table]
 
         return self.table
 
@@ -41,6 +41,22 @@ class Table:
 
         return self.table
 
+    def saute(self):
+
+        self.normalize()
+
+        string = ''
+
+        for list in self.table:
+
+            for element in list:
+
+                string += element
+
+            string += '\n'
+
+        return string
+
 
     # def create(self):
 
@@ -49,6 +65,7 @@ my_table = [['THIS', 'IS1', 'ROW1'],
             ['COL' , 'IS3', 'ROW3']]
 
 table = Table(my_table)
-[print(table.flip()) for _ in range(3)]
+# [print(table.flip()) for _ in range(3)]
+print(table.saute())
 
 # implement (different) separators for each column
