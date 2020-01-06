@@ -19,41 +19,29 @@ class Table:
 
         return self.table
 
-    def flip_by_rows(self):
-        pass
-
-    def flip_by_columns(self):
-
-        set = []
-
-        for index, list in enumerate(self.table):
-            
-            group = []
-
-            for list in self.table:
-                
-                group.append(list[index])
-
-            set.append(group)
-            
-        return set
-
     def flip(self):
         
-        if self.sort == 'rows':
+        if self.sort == 'rows' or self.sort == 'columns':
 
-            self.table = self.flip_by_columns()
-            self.sort = 'columns'
+            set = []
 
-        elif self.sort == 'columns':
+            for index, list in enumerate(self.table):
+            
+                group = []
 
-            self.table = self.flip_by_rows()
-            self.sort = 'rows'
+                for list in self.table:
+                
+                    group.append(list[index])
+
+            set.append(group)
+
+            self.table = set
+            self.sort = ['rows' if self.sort == 'columns' else 'columns']
 
         else:
 
             raise Exception(self.errors['sort'])
-        
+
         return self.table
 
 
