@@ -79,6 +79,14 @@ class Table:
             char = list(self.separators[i].keys())[0]
             string += (str(char) + ' ').join(self.table[i])
 
+            if self.separators[char] == False:
+
+                pass # insert separator at end of space
+
+            elif self.separators[char] == True:
+                
+                pass # insert separator at beginning of space
+
         return string
 
 
