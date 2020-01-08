@@ -13,7 +13,7 @@ setuptools.setup(
   author = 'Lucas Haefner',
   author_email = 'lucashaefner360@gmail.com',
   url = 'https://github.com/LucasHaefner/StrFry',
-  download_url = 'https://github.com/LucasHaefner/StrFry/archive/v_01.tar.gz',
+  download_url = 'https://github.com/LucasHaefner/StrFry/archive/v_0.0.1.tar.gz',
   keywords = ['String', 'Str', 'Dunder', 'Special Method', 'Table', 'Tables', 'Data'],
   packages = setuptools.find_packages(),
   classifiers=[
