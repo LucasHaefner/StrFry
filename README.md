@@ -1,14 +1,14 @@
 
 # StrFry - The easiest way to create human-readable tables in Python!
 
-## What is a table?
-A table is simply a list of one or more lists.
-
 # Overview
 Strfry allows users to manipulate tables, making them easier to read both for humans and machines.
 
+## What is a table?
+A table is simply a iterable of one or more iterable. Lists are recommended, as most functions and methods won't work on immutables or non-iterables.
+
 # Class Heirarchy:
-The Scrapeasy Python scraper was written with fast use in mind. It provides the following key features
+
 
 ## Table(table, separators, sort)
 
@@ -20,7 +20,7 @@ The Scrapeasy Python scraper was written with fast use in mind. It provides the 
 
 ## ...More being added!
 
-### Getting started
+## Getting started
 
 To download strfry, either fork this github repo or simply use Pypi via pip.
 ```sh
