@@ -41,13 +41,13 @@ class Table:
         
         set = []
 
-        for index, list in enumerate(self.table):
+        for index, grouping in enumerate(self.table):
             
             group = []
 
             for list in self.table:
                 
-                group.append(list[index])
+                group.append(grouping[index])
 
             set.append(group)
 
@@ -61,18 +61,17 @@ class Table:
         width = []
         padding = 1
 
-        for index, row in enumerate(self.table):
+        for index, grouping in enumerate(self.table):
 
-            width.append(len(max(row, key=len)))
+            width.append(len(max(grouping, key=len)))
 
         print('Width: ', width)
-        width = [i + padding for i in width]
 
-        for list in self.table:
+        for group in self.table:
 
             for index, element in enumerate(list):
 
-                element = element.ljust(width[index])
+                element = element.ljust(width[index] + padding)
 
         for i in range(len(self.table)):
             
@@ -96,9 +95,9 @@ class Table:
 
     #     string = ''
 
-    #     for list in self.table:
+    #     for grouping in self.table:
 
-    #         for element in list:
+    #         for element in grouping:
 
     #             string += element
 
