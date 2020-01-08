@@ -75,8 +75,9 @@ class Table:
                 element = element.ljust(width[index])
 
         for i in range(len(self.table)):
-
-            string += (next(iter(self.separators[i])) + ' ').join(self.table[i])
+            
+            char = list(self.separators[i].keys())[0]
+            string += (str(char) + ' ').join(self.table[i])
 
         return string
 
@@ -104,7 +105,7 @@ my_table = [['THIS', 'IS1', 'ROW1'],
             ['IS'  , 'IS2', 'ROW2'],
             ['COL' , 'IS3', 'ROW3']]
 
-table = Table(my_table, ':')
+table = Table(my_table)
 # [print(table.flip()) for _ in range(3)]
 print(table.align())
 
