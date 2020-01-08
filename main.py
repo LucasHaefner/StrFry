@@ -6,7 +6,7 @@ A simple module for creating human-readable tables in Python
 
 class Table:
 
-    def __init__(self, table, separators=[{':':False}], sort='rows'):
+    def __init__(self, table, separators=[{'|':True}], sort='rows'):
 
         self.table = table
         self.separators = separators
@@ -80,15 +80,14 @@ class Table:
         for i in range(len(self.table)):
 
             char = list(self.separators[i].keys())[0]
-            string += (str(char) + ' ').join(self.table[i])
 
             if self.separators[i][char] == False:
 
-                pass # insert separator at end of space
+                string += (str(char) + ' ').join(self.table[i])
 
             elif self.separators[i][char] == True:
                 
-                pass # insert separator at beginning of space
+                string += (' ' + str(char)).join(self.table[i])
 
         return string
 
