@@ -4,125 +4,120 @@
 A simple module for creating human-readable tables in Python
 """
 
-def normalize_list(list):
-	"""
-	Takes:
-		list : list
-			the list to convert
-	Returns:
-		list : list
-			list with all string elements
-	"""
-	normal_list = []
+class Table:
 
-	for index, element in enumerate(list):
+    def __init__(self, table, separators=[{':':False}], sort='rows'):
 
-		normal_list.append(str(element))
+        self.table = table
+        self.separators = separators
+        self.sort = sort
+        self.errors = {'sort':f'Invalid sorting key \'{self.sort}\'. Use \'rows\' or \'columns\'.'}
 
-	return normal_list
+        if self.sort == 'rows':
 
+            if len(self.separators) < len(self.table):
 
-def normalize_table(table):
-	"""
-	Takes:
-		table : list of lists
-			the table to convert
-	Returns:
-		table : list of lists
-			list(s) with all string elements
-	"""
-	normal_table = []
+                for _ in range(len(self.table)):
 
-	for index, list in enumerate(table):
+                    self.separators.append(separators[:1][0])
 
-		normal_table.append(normalize_list(list))
+        elif self.sort == 'columns':
 
-	return normal_table
+            if len(self.separators) < len(flip(self.table)):
 
-# def flip_table(table):
+                for _ in range(len(flip(self.table))):
 
+                    self.separators.append(separators[:1][0])
 
-def row(list, row_num=0, separator='|', headers=None):
-	"""
-	Takes:
-		row_num : int
-			the current row to render
-		list : list of lists
-			elements for each row
-		headers : list (default None)
-			a title string for each column
-	Returns:
-		rows : list of lists
-			list(s)
-				elements for each column
-	"""
-	output = []
-	width = []
-	padding = 1
-	separator = str(separator)
-	table = normalize_table(list)
-	unsorted = []
-	column = []
+        else:
 
-	for index, list in enumerate(table):
+            raise ValueError(self.errors[sort])
 
-		for list in table:
-			
-			print('element: ', list[index])
+    def separate(self, chars, alignments):
 
+        return [dict(zip(chars(i), alignments(i))) for i in min(chars, alignment)]
 
-	for index, row in enumerate(table):
+    def normalize(self):
 
-		width.append(len(max(row, key=len)))
+        return [[str(i) for i in list] for list in self.table]
 
-	print('Width: ', width)
-	width = [i + padding for i in width]
+    def flip(self):
+        
+        set = []
 
-	for row in table:
+        for index, grouping in enumerate(self.table):
+            
+            group = []
 
-		for index, element in enumerate(row):
+            for list in self.table:
+                
+                group.append(grouping[index])
 
-			row[index] = element.ljust(width[index])
+            set.append(group)
 
+        self.sort = ['rows' if self.sort == 'columns' else 'columns']
 
-	for i in range(len(table)):
+        return set
 
-		output = (separator + ' ').join(table[row_num])
+    def align(self):
 
-	return output
+        string = ''
+        widths = []
+        space = ''
+        padding = 1
 
+        for index, grouping in enumerate(self.table):
 
-def table(list, headers=None):
-	"""
-	Takes:
-		list : list of lists
-			elements for each row
-		separator : list of dicts
+            widths.append(len(max(grouping, key=len)))
 
-		headers : list (default None)
-			a title string for each column
-	Returns:
-		string : string
-			columns and rows aligned in a readable table
-	"""
-	string = ''
+        print('Widths: ', widths)
 
-	for i in range(len(columns)):
+        for grouping in self.table:
 
-		# string += f'{row(columns, i)}\n'
-		string += row(columns, i) + '\n'
+            for index, element in enumerate(grouping):
 
-	return string
+                element = element.ljust(widths[index] + padding)
+
+                for i in range(len(self.table)):
+
+                    char = list(self.separators[i].keys())[0]
+
+                    if self.separators[i][char] == True:
+
+                        string += element + str(char)
+
+                    elif self.separators[i][char] == False:
+                
+                        string += str(char) + element
+
+        return string
 
 
-table = {'group_by_rows' : [['ROW_1', 1, '#1'],
-							['ROW_2', 2, '#commffffffffffffffffent'],
-							['ROW_3', 3, '#oo']
-						   ]
-		}
+    # def saute(self):
 
-# print(table(columns))
-table(table)
+    #     self.normalize()
 
-# implement separators for each column
-# allow different width for each column
+    #     string = ''
+
+    #     for grouping in self.table:
+
+    #         for element in list:
+
+    #             string += element
+
+    #         string += '\n'
+
+    #     return string
+
+
+    # def create(self):
+
+my_table = [['THIS', 'IS1', 'ROW1'],
+            ['IS'  , 'IS2', 'ROW2'],
+            ['COL' , 'IS3', 'ROW3']]
+
+table = Table(my_table)
+# [print(table.flip()) for _ in range(3)]
+print(table.align())
+
+# implement (different) separators for each column
