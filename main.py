@@ -69,15 +69,17 @@ class Table:
 
             width.append(len(max(grouping, key=len)))
 
-        print('Width: ', width)
+        set = []
 
         for grouping in self.table:
 
+            group = []
+
             for index, element in enumerate(grouping):
 
-                element = element.ljust(width[index] + padding)
+                group.append(element.ljust(width[index] + padding))
 
-            # grouping.append('\n')
+            set.extend([group, '\n'])
 
         for i in range(len(self.table)):
 
@@ -85,11 +87,11 @@ class Table:
 
             if self.separators[i][char] == False:
 
-                string += (str(char) + ' ').join(self.table[i])
+                string += (str(char) + ' ').join(set[i])
 
             elif self.separators[i][char] == True:
                 
-                string += (' ' + str(char)).join(self.table[i])
+                string += (' ' + str(char)).join(set[i])
 
         return string
 
@@ -99,25 +101,17 @@ class Table:
         self.table = self.normalize()
         self.table = self.align()
 
-        string = ''
-
-        for grouping in self.table:
-
-            for element in grouping:
-
-                string += element
-
-            # string += '\n'
-
-        return string
+        return self.table
 
 
-    # def create(self):
+def create(groupings=(), sort='rows'):
 
-my_table = [['THIS', 'IS1', 'ROW1'],
-            ['IS'  , 'IS2', 'ROW2'],
-            ['COL' , 'IS3', 'ROW3']]
+    table = []
 
-table = Table(my_table)
+    for i in groupings:
 
-print(table.saute())
+        table.append(i)
+
+    return Table(table, sort).table
+
+print(create([1, 2, 3], [4, 5, 6]))
