@@ -8,15 +8,17 @@ A table is simply a list of one or more lists.
 Strfry allows users to manipulate tables, making them easier to read both for humans and machines.
 
 # Class Heirarchy:
+The Scrapeasy Python scraper was written with fast use in mind. It provides the following key features
 
-	-## Table(table, separators, sort)
-		- separate()
-		- normalize()
-		- flip()
-		- align()
-		- saute()
-		
-	-## ...More being added!
+## Table(table, separators, sort)
+
+	- separate()
+	- normalize()
+	- flip()
+	- align()
+	- saute()
+
+## ...More being added!
 
 ### Getting started
 
