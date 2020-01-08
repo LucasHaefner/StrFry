@@ -17,13 +17,17 @@ class Table:
 
             if len(self.separators) < len(self.table):
 
-                [separators.append(separators[:1]) for _ in range(len(self.table))]
+                for _ in range(len(self.table)):
+
+                    separators.append(separators[:1])
 
         elif self.sort == 'columns':
 
             if len(self.separators) < len(flip(self.table)):
 
-                [separators.append(separators[:1]) for _ in range(len(flip(self.table)))]
+                for _ in range(len(flip(self.table))):
+
+                    separators.append(separators[:1])
 
         else:
 
@@ -67,9 +71,9 @@ class Table:
 
         print('Width: ', width)
 
-        for group in self.table:
+        for grouping in self.table:
 
-            for index, element in enumerate(list):
+            for index, element in enumerate(grouping):
 
                 element = element.ljust(width[index] + padding)
 
@@ -78,11 +82,11 @@ class Table:
             char = list(self.separators[i].keys())[0]
             string += (str(char) + ' ').join(self.table[i])
 
-            if self.separators[char] == False:
+            if self.separators[i][char] == False:
 
                 pass # insert separator at end of space
 
-            elif self.separators[char] == True:
+            elif self.separators[i][char] == True:
                 
                 pass # insert separator at beginning of space
 
@@ -97,7 +101,7 @@ class Table:
 
     #     for grouping in self.table:
 
-    #         for element in grouping:
+    #         for element in list:
 
     #             string += element
 
