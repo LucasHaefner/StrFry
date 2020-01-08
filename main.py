@@ -6,7 +6,11 @@ A simple module for creating human-readable tables in Python
 
 class Table:
 
-    def __init__(self, table, separators=[{'|':True}], sort='rows'):
+    """
+    Methods for operating on and printing tables
+    """
+
+    def __init__(self, table, separators=[{':':False}], sort='rows'):
 
         self.table = table
         self.separators = separators
@@ -35,13 +39,31 @@ class Table:
 
     def separate(self, chars, alignments):
 
+        """
+        Inherits from Table()
+        Takes 'self', iterable 'chars', iterable 'alignments'
+        Returns dict of keys 'chars' and values 'alignments'
+        """
+
         return [dict(zip(chars(i), alignments(i))) for i in min(chars, alignment)]
 
     def normalize(self):
 
+        """
+        Inherits from Table()
+        Takes 'self'
+        Returns 'self.table' with all 'elements' of grouping' converted to type(str)
+        """
+
         return [[str(element) for element in grouping] for grouping in self.table]
 
     def flip(self):
+
+        """
+        Inherits from Table()
+        Takes 'self'
+        Returns flip floping 'rows' and 'columns' grouping of 'self.table'
+        """
         
         set = []
 
@@ -60,6 +82,12 @@ class Table:
         return set
 
     def align(self):
+
+        """
+        Inherits from Table()
+        Takes 'self'
+        Returns string of 'self.table' with left justified elements formatted with a separator
+        """
 
         string = ''
         width = []
@@ -97,6 +125,12 @@ class Table:
 
 
     def saute(self):
+
+        """
+        Inherits from Table()
+        Takes 'self'
+        Returns properly formatted form of 'self.table'
+        """
         
         self.table = self.normalize()
         self.table = self.align()
@@ -105,6 +139,11 @@ class Table:
 
 
 def create(groupings=(), sort='rows'):
+
+    """
+    Takes 'groupings', 'sort'
+    Returns new table of 'groupings' sorted by 'sort'
+    """
 
     table = []
 
