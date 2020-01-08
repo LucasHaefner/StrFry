@@ -77,6 +77,8 @@ class Table:
 
                 element = element.ljust(width[index] + padding)
 
+            # grouping.append('\n')
+
         for i in range(len(self.table)):
 
             char = list(self.separators[i].keys())[0]
@@ -93,9 +95,9 @@ class Table:
 
 
     def saute(self):
-
-        self.normalize()
-        self.align()
+        
+        self.table = self.normalize()
+        self.table = self.align()
 
         string = ''
 
@@ -105,7 +107,7 @@ class Table:
 
                 string += element
 
-            string += '\n'
+            # string += '\n'
 
         return string
 
