@@ -1,0 +1,1 @@
+from strfry.table.py import Table
