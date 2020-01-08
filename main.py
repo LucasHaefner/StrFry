@@ -19,7 +19,7 @@ class Table:
 
                 for _ in range(len(self.table)):
 
-                    separators.append(separators[:1])
+                    self.separators.append(separators[:1][0])
 
         elif self.sort == 'columns':
 
@@ -27,7 +27,7 @@ class Table:
 
                 for _ in range(len(flip(self.table))):
 
-                    separators.append(separators[:1])
+                    self.separators.append(separators[:1][0])
 
         else:
 
@@ -78,7 +78,7 @@ class Table:
                 element = element.ljust(width[index] + padding)
 
         for i in range(len(self.table)):
-            
+
             char = list(self.separators[i].keys())[0]
             string += (str(char) + ' ').join(self.table[i])
 
