@@ -19,17 +19,17 @@ class Table:
 
         if self.sort == 'rows':
 
-            if len(self.separators) < len(self.table):
+            if len(self.separators) < (len(self.table) - 1):
 
-                for _ in range(len(self.table)):
+                for _ in range(len(self.table) - 1):
 
                     self.separators.append(separators[:1][0])
 
         elif self.sort == 'columns':
 
-            if len(self.separators) < len(flip(self.table)):
+            if len(self.separators) < (len(self.flip()) - 1):
 
-                for _ in range(len(flip(self.table))):
+                for _ in range(len(flip(self.table)) - 1):
 
                     self.separators.append(separators[:1][0])
 
@@ -69,13 +69,13 @@ class Table:
 
         for index, grouping in enumerate(self.table):
             
-            group = []
+            line = []
 
             for list in self.table:
                 
-                group.append(grouping[index])
+                line.append(grouping[index])
 
-            set.append(group)
+            set.append(line)
 
         self.sort = ['rows' if self.sort == 'columns' else 'columns']
 
@@ -101,13 +101,14 @@ class Table:
 
         for grouping in self.table:
 
-            group = []
+            line = []
 
             for index, element in enumerate(grouping):
 
-                group.append(element.ljust(width[index] + padding))
+                line.append(element.ljust(width[index] + padding))
 
-            set.extend([group, '\n'])
+            line += '\n'
+            set.append(line)
 
         for i in range(len(self.table)):
 
@@ -131,9 +132,17 @@ class Table:
         Takes 'self'
         Returns properly formatted form of 'self.table'
         """
-        
-        self.table = self.normalize()
-        self.table = self.align()
 
-        return self.table
-        
+        table = self.normalize()
+        table = self.align()
+
+        return table
+    
+if __name__ == '__main__':
+
+    my_table = [['R1C1', 'R1C2', 'R1C3'],
+                ['R2C1', 'R2C2', 'R2C3'],
+                ['R3C1', 'R3C2', 'R3C3']]
+
+    table = Table(my_table)
+    print(table.saute())
