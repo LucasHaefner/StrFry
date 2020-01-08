@@ -39,7 +39,7 @@ class Table:
 
     def normalize(self):
 
-        return [[str(i) for i in list] for list in self.table]
+        return [[str(element) for element in grouping] for grouping in self.table]
 
     def flip(self):
         
@@ -92,21 +92,22 @@ class Table:
         return string
 
 
-    # def saute(self):
+    def saute(self):
 
-    #     self.normalize()
+        self.normalize()
+        self.align()
 
-    #     string = ''
+        string = ''
 
-    #     for grouping in self.table:
+        for grouping in self.table:
 
-    #         for element in list:
+            for element in grouping:
 
-    #             string += element
+                string += element
 
-    #         string += '\n'
+            string += '\n'
 
-    #     return string
+        return string
 
 
     # def create(self):
