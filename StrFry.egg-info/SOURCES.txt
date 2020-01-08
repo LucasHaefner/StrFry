@@ -1,9 +1,0 @@
-README.md
-setup.cfg
-setup.py
-StrFry.egg-info/PKG-INFO
-StrFry.egg-info/SOURCES.txt
-StrFry.egg-info/dependency_links.txt
-StrFry.egg-info/top_level.txt
-strfry/__init__.py
-strfry/table.py
