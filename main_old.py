@@ -6,7 +6,7 @@ A simple module for creating human-readable tables in Python
 
 class Table:
 
-    def __init__(self, table, separators=[{':':False}], sort='rows'):
+    def __init__(self, table, separators=[{'|':True}], sort='rows'):
 
         self.table = table
         self.separators = separators
@@ -62,33 +62,32 @@ class Table:
     def align(self):
 
         string = ''
-        widths = []
-        space = ''
+        width = []
         padding = 1
 
         for index, grouping in enumerate(self.table):
 
-            widths.append(len(max(grouping, key=len)))
+            width.append(len(max(grouping, key=len)))
 
-        print('Widths: ', widths)
+        print('Width: ', width)
 
         for grouping in self.table:
 
             for index, element in enumerate(grouping):
 
-                element = element.ljust(widths[index] + padding)
+                element = element.ljust(width[index] + padding)
 
-                for i in range(len(self.table)):
+        for i in range(len(self.table)):
 
-                    char = list(self.separators[i].keys())[0]
+            char = list(self.separators[i].keys())[0]
 
-                    if self.separators[i][char] == True:
+            if self.separators[i][char] == False:
 
-                        string += element + str(char)
+                string += (str(char) + ' ').join(self.table[i])
 
-                    elif self.separators[i][char] == False:
+            elif self.separators[i][char] == True:
                 
-                        string += str(char) + element
+                string += (' ' + str(char)).join(self.table[i])
 
         return string
 
@@ -117,7 +116,5 @@ my_table = [['THIS', 'IS1', 'ROW1'],
             ['COL' , 'IS3', 'ROW3']]
 
 table = Table(my_table)
-# [print(table.flip()) for _ in range(3)]
-print(table.align())
 
-# implement (different) separators for each column
+print(table.saute())
