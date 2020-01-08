@@ -136,21 +136,4 @@ class Table:
         self.table = self.align()
 
         return self.table
-
-
-def create(groupings=(), sort='rows'):
-
-    """
-    Takes 'groupings', 'sort'
-    Returns new table of 'groupings' sorted by 'sort'
-    """
-
-    table = []
-
-    for i in groupings:
-
-        table.append(i)
-
-    return Table(table, sort).table
-
-print(create([1, 2, 3], [4, 5, 6]))
+        
