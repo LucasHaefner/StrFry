@@ -19,17 +19,17 @@ class Table:
 
         if self.sort == 'rows':
 
-            if len(self.separators) < (len(self.table) - 1):
+            if len(self.separators) < len(self.table):
 
-                for _ in range(len(self.table) - 1):
+                for _ in range(len(self.table) - 2):
 
                     self.separators.append(separators[:1][0])
 
         elif self.sort == 'columns':
 
-            if len(self.separators) < (len(self.flip()) - 1):
+            if len(self.separators) < len(self.flip()):
 
-                for _ in range(len(flip(self.table)) - 1):
+                for _ in range(len(self.flip()) - 2):
 
                     self.separators.append(separators[:1][0])
 
@@ -112,15 +112,29 @@ class Table:
 
         for i in range(len(self.table)):
 
-            char = list(self.separators[i].keys())[0]
+            print('1 ', i, self.separators)
 
-            if self.separators[i][char] == False:
+            try:
 
-                string += (str(char) + ' ').join(set[i])
+                char = str(list(self.separators[i].keys())[0])
 
-            elif self.separators[i][char] == True:
+            except:
+
+                char = None
+
+            try:
+            
+                if self.separators[i][char] == False:
+
+                    string += (char + ' ').join(set[i])
+
+                elif self.separators[i][char] == True:
                 
-                string += (' ' + str(char)).join(set[i])
+                    string += (' ' + char).join(set[i])
+
+            except:
+
+                string += ' '.join(set[i])
 
         return string
 
@@ -146,3 +160,7 @@ if __name__ == '__main__':
 
     table = Table(my_table)
     print(table.saute())
+
+# error in align() function:
+#   separator ends vertically rather than horizontally
+#   add flip() functionality to make sauteing simpler
