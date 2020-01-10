@@ -99,11 +99,11 @@ class Table:
 
         set = []
 
-        for group in self.table:
+        for grouping in self.table:
 
             line = []
 
-            for index, element in enumerate(group):
+            for index, element in enumerate(grouping):
 
                 line.append(element.ljust(width[index] + padding))
 
@@ -111,9 +111,69 @@ class Table:
             set.append(line)
             print('+ ', set, '\n   ', line, '\n')
 
-        print('Set: ', set)
+        print('Set: ', set, '\n')
+
+        for i in range(len(self.table)):
+
+            print('1 ', i, self.separators, '\n')
+
+            try:
+
+                char = str(list(self.separators[i].keys())[0])
+
+            except:
+
+                char = None
+
+            try:
+            
+                if self.separators[i][char] == False:
+
+                    string += (char + ' ').join(set[i])
+
+                elif self.separators[i][char] == True:
+                
+                    string += (' ' + char).join(set[i])
+
+            except:
+
+                string += ' '.join(set[i])
 
         return string
+
+        # for group_index, group in enumerate(self.table):
+
+        #     line = []
+
+        #     try:
+
+        #         char = str(list(self.separators[i].keys())[0])
+
+        #     except:
+
+        #         char = ''
+
+        #     for element_index, element in enumerate(group):
+
+        #         line.append(element.ljust(width[element_index] + padding))
+
+        #         if self.separators[group_index].get(char, False):
+
+        #             string += (char + ' ').join(set[element_index])
+
+        #         else:
+
+        #             string += (' ' + char).join(set[element_index])
+
+
+
+        #     line += '\n'
+        #     set.append(line)
+        #     print('+ ', set, '\n   ', line, '\n')
+
+        # print('Set: ', set)
+
+        # return string
 
 
     def saute(self):
