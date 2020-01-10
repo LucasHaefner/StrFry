@@ -115,7 +115,7 @@ class Table:
 
         for i in range(len(self.table)):
 
-            print('1 ', i, self.separators, '\n')
+            print(i, self.separators, '\n')
 
             try:
 
