@@ -52,28 +52,28 @@ class Table:
         """
         Inherits from Table()
         Takes 'self'
-        Returns 'self.table' with all 'elements' of group' converted to type(str)
+        Returns 'self.table' with all 'elements' of grouping' converted to type(str)
         """
 
-        return [[str(element) for element in group] for group in self.table]
+        return [[str(element) for element in grouping] for grouping in self.table]
 
     def flip(self):
 
         """
         Inherits from Table()
         Takes 'self'
-        Returns flip floping 'rows' and 'columns' group of 'self.table'
+        Returns flip floping 'rows' and 'columns' grouping of 'self.table'
         """
         
         set = []
 
-        for index, group in enumerate(self.table):
+        for index, grouping in enumerate(self.table):
             
             line = []
 
             for list in self.table:
                 
-                line.append(group[index])
+                line.append(grouping[index])
 
             set.append(line)
 
@@ -93,25 +93,49 @@ class Table:
         width = []
         padding = 1
 
-        for index, group in enumerate(self.table):
+        for index, grouping in enumerate(self.table):
 
-            width.append(len(max(group, key=len)))
+            width.append(len(max(grouping, key=len)))
 
         set = []
 
-        for group in self.table:
+        for grouping in self.table:
 
             line = []
 
-            for index, element in enumerate(group):
+            for index, element in enumerate(grouping):
 
                 line.append(element.ljust(width[index] + padding))
 
             line += '\n'
             set.append(line)
-            print('+ ', set, '\n   ', line, '\n')
+            # set.extend((line, '\n'))
 
-        print('Set: ', set)
+        for i in range(len(self.table)):
+
+            print('1 ', i, self.separators)
+
+            try:
+
+                char = str(list(self.separators[i].keys())[0])
+
+            except:
+
+                char = None
+
+            try:
+            
+                if self.separators[i][char] == False:
+
+                    string += (char + ' ').join(set[i])
+
+                elif self.separators[i][char] == True:
+                
+                    string += (' ' + char).join(set[i])
+
+            except:
+
+                string += ' '.join(set[i])
 
         return string
 
