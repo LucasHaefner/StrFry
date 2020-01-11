@@ -24,7 +24,7 @@ class Table:
     def flip(self):
         """
         Switches self.table between ting by lists of rows/lists of columns.
-        :return: 'flipped' form of self.table
+        :return: list of lists of the nth element of each list in self.table
         """
         array = []
 
@@ -39,7 +39,7 @@ class Table:
     def align(self):
         """
         Adds text justification and character separator (if valid)
-        :retur:s string with left justified elements formatted with a separator
+        :return: string with left justified elements formatted with a separator
         """
         string = ''
         array, width, alignments, chars = [], [], [], []
