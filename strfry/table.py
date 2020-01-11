@@ -6,18 +6,15 @@ A simple module for creating human-readable tables in Python
 
 class Table:
 
-    """
-    Methods for operating on and printing tables
-    """
-
-    def __init__(self, table, separators=[{':':False}], sort='rows'):
+    def __init__(self, table, separators=[{':':False}], assortment='rows'):
 
         self.table = table
         self.separators = separators
-        self.sort = sort
-        self.errors = {'sort':f'Invalid sorting key \'{self.sort}\'. Use \'rows\' or \'columns\'.'}
+        self.assortment = assortment
+        
+        errors = {'assortment':f'Invalid assortmenting key \'{self.assortment}\'. Use \'rows\' or \'columns\'.'}
 
-        if self.sort == 'rows':
+        if self.assortment == 'rows':
 
             if len(self.separators) < len(self.table):
 
@@ -25,7 +22,7 @@ class Table:
 
                     self.separators.append(separators[:1][0])
 
-        elif self.sort == 'columns':
+        elif self.assortment == 'columns':
 
             if len(self.separators) < len(self.flip()):
 
@@ -35,14 +32,15 @@ class Table:
 
         else:
 
-            raise ValueError(self.errors[sort])
+            raise ValueError(errors[assortment])
 
     def separate(self, chars, alignments):
 
         """
-        Inherits from Table()
-        Takes 'self', iterable 'chars', iterable 'alignments'
-        Returns dict of keys 'chars' and values 'alignments'
+        Makes it easier to find the correct character to separate later on.
+        :param chars: iterable of single characters
+        :param alignments: iterable of boolean values :True: center :False: left
+        :return: list of dicts :key: char :value: alignment
         """
 
         return [dict(zip(chars(i), alignments(i))) for i in min(chars, alignment)]
@@ -50,36 +48,34 @@ class Table:
     def normalize(self):
 
         """
-        Inherits from Table()
-        Takes 'self'
-        Returns 'self.table' with all 'elements' of group' converted to type(str)
+        Allows for text justification for table of non-string elements.
+        :return: list of lists of self.table's elements in string form
         """
 
-        return [[str(element) for element in group] for group in self.table]
+        return [[str(element) for element in t] for t in self.table]
 
     def flip(self):
 
         """
-        Inherits from Table()
-        Takes 'self'
-        Returns flip floping 'rows' and 'columns' group of 'self.table'
+        Switches self.table between ting by lists of rows/lists of columns.
+        :return: 'flipped' form of self.table
         """
         
-        set = []
+        array = []
 
-        for index, group in enumerate(self.table):
+        for index, t in enumerate(self.table):
             
-            line = []
+            slot = []
 
             for list in self.table:
                 
-                line.append(group[index])
+                slot.append(t[index])
 
-            set.append(line)
+            array.append(slot)
 
-        self.sort = ['rows' if self.sort == 'columns' else 'columns']
+        self.assortment = ['rows' if self.assortment == 'columns' else 'columns']
 
-        return set
+        return array
 
     def align(self):
 
@@ -93,29 +89,29 @@ class Table:
         width = []
         padding = 1
 
-        for index, group in enumerate(self.table):
+        for index, t in enumerate(self.table):
 
-            width.append(len(max(group, key=len)))
+            width.append(len(max(t, key=len)))
 
-        set = []
+        array = []
 
-        for group in self.table:
+        for t in self.table:
 
-            line = []
+            slot = []
 
-            for index, element in enumerate(group):
+            for index, element in enumerate(t):
 
-                line.append(element.ljust(width[index] + padding))
+                slot.append(element.ljust(width[index] + padding))
 
-            set.append(line)
+            array.append(slot)
 
-        for group in set:
+        for t in array:
 
-            for index, element in enumerate(group):
+            for index, element in enumerate(t):
 
-                if index < (len(group) - 1):
+                if index < (len(t) - 1):
 
-                    pair = group[index], group[index + 1]
+                    pair = t[index], t[index + 1]
 
                     try:
 
