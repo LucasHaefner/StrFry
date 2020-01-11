@@ -1,1 +1,1 @@
-from strfry.table import Table
+from strfry.main import Table
