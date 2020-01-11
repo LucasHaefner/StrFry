@@ -16,13 +16,12 @@ A table is simply a iterable of one or more iterable. Lists are recommended, as 
 	- normalize()
 	- flip()
 	- align()
-	- saute()
 
 ## ...More being added!
 
 ## Getting started
 
-To download strfry, either fork this github repo or simply use Pypi via pip.
+To download strfry, either fork this github repo or simply use PyPi via pip.
 ```sh
 $ pip install strfry
 ```
