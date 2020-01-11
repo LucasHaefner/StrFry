@@ -10,9 +10,8 @@ A table is simply a iterable of one or more iterable. Lists are recommended, as 
 # Class Heirarchy:
 
 
-## Table(table, separators, sort)
+## Table
 
-	- separate()
 	- normalize()
 	- flip()
 	- align()
