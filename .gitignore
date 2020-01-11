@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # Folders
-*dist/
-*StrFry.egg-info/
+/dist
+/StrFry.egg-info
