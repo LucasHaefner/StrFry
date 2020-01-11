@@ -69,24 +69,24 @@ class Table:
 
         for slot in array:
             for i, element in enumerate(slot):
-                reference = iter(slot)
-                pair = next(reference)
-                print(pair)
+                # reference = iter(slot)
+                # pair = next(reference)
+                # print(pair)
 
                 # string += pair
-                # if i < (len(s) - 1):
-                #     pair = slot[i], slot[i + 1]
-                #     try:
-                #         char = str(list(self.separators[i].keys())[0])
-                #     except:
-                #         char = ''
-                #     try:
-                #         if not bool(self.separators[i].get(char)):
-                #             string += (char + ' ').join(pair)
-                #         else:
-                #             string += (' ' + char).join(pair)
-                #     except:
-                #         string += ' '.join(pair)
+                if i < (len(s) - 1):
+                    pair = slot[i], slot[i + 1]
+                    try:
+                        char = str(list(self.separators[i].keys())[0])
+                    except:
+                        char = ''
+                    try:
+                        if not bool(self.separators[i].get(char)):
+                            string += (char + ' ').join(pair)
+                        else:
+                            string += (' ' + char).join(pair)
+                    except:
+                        string += ' '.join(pair)
                 string += '\n'
         return string
 
