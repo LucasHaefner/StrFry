@@ -10,8 +10,11 @@ cols_example = [['R1C1', 'R2C1', 'R3C1'],
 
 print('Rows:\n')
 rows = strfry.Table(rows_example, 'rows')
-print(rows, '\n')
+print(rows)
+
+table = strfry.Table(rows_example, 'columns')
+print(table)
 
 print('Columns:\n')
 columns = strfry.Table(cols_example, 'columns')
-print(columns, '\n')
+print(columns)

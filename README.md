@@ -20,7 +20,7 @@ A table is simply a iterable of one or more iterable. Lists are recommended, as 
 
 ## Getting started
 
-To download strfry, either fork this github repo or simply use PyPi via pip.
+To download StrFry, either fork this github repo or simply use PyPi via pip.
 ```sh
 $ pip install strfry
 ```
