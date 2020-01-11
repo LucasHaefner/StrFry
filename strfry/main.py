@@ -44,10 +44,10 @@ class Table:
 
         [width.append(len(max(s, key=len))) for s in self.table]
 
-        for i in self.separators:
-            if i[0] == '/' and len(i) > 1:
+        for i, element in enumerate(self.separators):
+            if element[0] == '>' and len(element) > 1:
                 alignments.append(True)
-                i = i[1:]
+                self.separators[i] = element[1:]
             else:
                 alignments.append(False)
 
@@ -58,12 +58,21 @@ class Table:
             array.append(slot)
 
         for slot in array:
-            try:
-                char = str(list(self.separators[i].keys())[0])
-            except:
-                char = ' '
             for i, element in enumerate(slot):
-                string += f'{element}{padding}{char}{padding}'
+                try:
+                    char = str(self.separators[i])
+                except:
+                    char = ' '
+
+                try:
+                    if alignments[i]:
+                        char += 2 * padding
+                    elif not alignments[i]:
+                        char = f'{padding}{char}{padding}'
+                except:
+                    char += padding
+
+                string += f'{element}{char}'
             string += '\n'
         return string
 
