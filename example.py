@@ -9,9 +9,9 @@ cols_example = [['R1C1', 'R2C1', 'R3C1'],
             	['R1C3', 'R2C3', 'R3C3']]
 
 print('Rows:\n')
-table = strfry.Table(rows_example, 'rows', '>:')
-print(table, '\n')
+rows = strfry.Table(rows_example, 'rows')
+print(rows, '\n')
 
 print('Columns:\n')
-table = strfry.Table(cols_example, 'columns', ':')
-print(table, '\n')
+columns = strfry.Table(cols_example, 'columns')
+print(columns, '\n')

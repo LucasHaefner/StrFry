@@ -1,7 +1,7 @@
 # ...StrFry/main.py
 
 class Table:
-    def __init__(self, table, grouping='rows', separators=[':']):
+    def __init__(self, table, grouping='rows', separators=['>:']):
         self.table = table
         self.grouping = grouping
         self.separators = separators
@@ -42,16 +42,18 @@ class Table:
         :retur:s string with left justified elements formatted with a separator
         """
         string = ''
-        array, width, alignments = [], [], []
+        array, width, alignments, chars = [], [], [], []
         margin = 1
         padding = margin * ' '
 
         [width.append(len(max(s, key=len))) for s in self.table]
 
         for i, element in enumerate(self.separators):
+            chars.append(element)
+
             if element[0] == '>' and len(element) > 1:
                 alignments.append(True)
-                self.separators[i] = element[1:]
+                chars[i] = element[1:]
             else:
                 alignments.append(False)
 
@@ -64,7 +66,7 @@ class Table:
         for slot in array:
             for i, element in enumerate(slot):
                 try:
-                    char = str(self.separators[i])
+                    char = str(chars[i])
                 except:
                     char = ' '
 
