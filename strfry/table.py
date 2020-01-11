@@ -143,13 +143,7 @@ class Table:
 
         return string
 
-    def saute(self):
-
-        """
-        Inherits from Table()
-        Takes 'self'
-        Returns properly formatted form of 'self.table'
-        """
+    def __str__(self):
 
         table = self.normalize()
         table = self.align()
@@ -163,7 +157,7 @@ if __name__ == '__main__':
                 ['R3C1', 'R3C2', 'R3C3']]
 
     table = Table(my_table)
-    print(table.saute())
+    print(table())
 
 # error in align() function:
 #   separator ends vertically rather than horizontally
