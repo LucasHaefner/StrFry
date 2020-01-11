@@ -99,45 +99,77 @@ class Table:
 
         set = []
 
-        for grouping in self.table:
+        for group in self.table:
 
             line = []
 
-            for index, element in enumerate(grouping):
+            for index, element in enumerate(group):
 
                 line.append(element.ljust(width[index] + padding))
 
-            line += '\n'
+            # line += '\n'
             set.append(line)
-            print('+ ', set, '\n   ', line, '\n')
+        #     print('+ ', set, '\n   ', line, '\n')
 
-        print('Set: ', set, '\n')
+        # print('Set: ', set, '\n')
 
-        for i in range(len(self.table)):
+        for group in set:
 
-            print(i, self.separators, '\n')
+            for index, element in enumerate(group):
 
-            try:
+                if index < (len(group) - 1):
 
-                char = str(list(self.separators[i].keys())[0])
+                    pair = group[index], group[index + 1]
 
-            except:
+                    try:
 
-                char = None
+                        char = str(list(self.separators[index].keys())[0])
 
-            try:
-            
-                if self.separators[i][char] == False:
+                    except:
 
-                    string += (char + ' ').join(set[i])
+                        char = ''
 
-                elif self.separators[i][char] == True:
+                    try:
+
+                        if bool(self.separators[index].get(char)):
+
+                            string += (' ' + char).join(pair)
+
+                        else:
+
+                            string += (char + ' ').join(pair)
+
+                    except:
+
+                        string += ' '.join(pair)
+
+                string += '\n'
+
+        # for index_group, group in enumerate(set):
+
+        #     for index_element, element in enumerate(group):
+
+        #         try:
+
+        #             char = str(list(self.separators[index_group < len(set) and index_group or None].keys())[0])
+
+        #         except:
+
+        #             char = ''
+
+        #         try:
+
+        #             if not self.separators[index_group][char]:
+
+        #                 string += (char + ' ').join(set[index_group])
+
+        #         except:
+
+        #             pass
                 
-                    string += (' ' + char).join(set[i])
-
-            except:
-
-                string += ' '.join(set[i])
+        #         else:
+                
+        #             string += (' ' + char).join(set[index_group])
 
         return string
 
