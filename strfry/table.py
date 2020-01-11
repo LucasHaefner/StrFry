@@ -107,11 +107,7 @@ class Table:
 
                 line.append(element.ljust(width[index] + padding))
 
-            # line += '\n'
             set.append(line)
-        #     print('+ ', set, '\n   ', line, '\n')
-
-        # print('Set: ', set, '\n')
 
         for group in set:
 
@@ -131,13 +127,13 @@ class Table:
 
                     try:
 
-                        if bool(self.separators[index].get(char)):
+                        if not bool(self.separators[index].get(char)):
 
-                            string += (' ' + char).join(pair)
+                            string += (char + ' ').join(pair)
 
                         else:
 
-                            string += (char + ' ').join(pair)
+                            string += (' ' + char).join(pair)
 
                     except:
 
@@ -145,68 +141,7 @@ class Table:
 
                 string += '\n'
 
-        # for index_group, group in enumerate(set):
-
-        #     for index_element, element in enumerate(group):
-
-        #         try:
-
-        #             char = str(list(self.separators[index_group < len(set) and index_group or None].keys())[0])
-
-        #         except:
-
-        #             char = ''
-
-        #         try:
-
-        #             if not self.separators[index_group][char]:
-
-        #                 string += (char + ' ').join(set[index_group])
-
-        #         except:
-
-        #             pass
-                
-        #         else:
-                
-        #             string += (' ' + char).join(set[index_group])
-
         return string
-
-        # for group_index, group in enumerate(self.table):
-
-        #     line = []
-
-        #     try:
-
-        #         char = str(list(self.separators[i].keys())[0])
-
-        #     except:
-
-        #         char = ''
-
-        #     for element_index, element in enumerate(group):
-
-        #         line.append(element.ljust(width[element_index] + padding))
-
-        #         if self.separators[group_index].get(char, False):
-
-        #             string += (char + ' ').join(set[element_index])
-
-        #         else:
-
-        #             string += (' ' + char).join(set[element_index])
-
-
-
-        #     line += '\n'
-        #     set.append(line)
-        #     print('+ ', set, '\n   ', line, '\n')
-
-        # print('Set: ', set)
-
-        # return string
-
 
     def saute(self):
 
