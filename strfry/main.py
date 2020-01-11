@@ -28,10 +28,10 @@ class Table:
         """
         array = []
 
-        for index, s in enumerate(self.table):
+        for i, s in enumerate(self.table):
             slot = []
-            for _ in self.table:
-                slot.append(s[index])
+            for e in s:
+                slot.append(e)
             array.append(slot)
         self.grouping = ['rows' if self.grouping == 'columns' else 'columns']
         return array
