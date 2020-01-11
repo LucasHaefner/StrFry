@@ -6,15 +6,15 @@ A simple module for creating human-readable tables in Python
 
 class Table:
 
-    def __init__(self, table, separators=[{':':False}], assortment='rows'):
+    def __init__(self, table, separators=[{':':False}], grouping='rows'):
 
         self.table = table
         self.separators = separators
-        self.assortment = assortment
+        self.grouping = grouping
         
-        errors = {'assortment':f'Invalid assortmenting key \'{self.assortment}\'. Use \'rows\' or \'columns\'.'}
+        errors = {'grouping':f'Invalid groupinging key \'{self.grouping}\'. Use \'rows\' or \'columns\'.'}
 
-        if self.assortment == 'rows':
+        if self.grouping == 'rows':
 
             if len(self.separators) < len(self.table):
 
@@ -22,7 +22,7 @@ class Table:
 
                     self.separators.append(separators[:1][0])
 
-        elif self.assortment == 'columns':
+        elif self.grouping == 'columns':
 
             if len(self.separators) < len(self.flip()):
 
@@ -32,7 +32,7 @@ class Table:
 
         else:
 
-            raise ValueError(errors[assortment])
+            raise ValueError(errors[grouping])
 
     def separate(self, chars, alignments):
 
@@ -43,7 +43,7 @@ class Table:
         :return: list of dicts :key: char :value: alignment
         """
 
-        return [dict(zip(chars(i), alignments(i))) for i in min(chars, alignment)]
+        return [dict(zip(chars(i), alignments(i))) for i in range(min(len(chars), len(alignment)))]
 
     def normalize(self):
 
@@ -52,7 +52,7 @@ class Table:
         :return: list of lists of self.table's elements in string form
         """
 
-        return [[str(element) for element in t] for t in self.table]
+        return [[str(e) for e in s] for s in self.table]
 
     def flip(self):
 
@@ -63,17 +63,17 @@ class Table:
         
         array = []
 
-        for index, t in enumerate(self.table):
+        for index, s in enumerate(self.table):
             
             slot = []
 
-            for list in self.table:
+            for _ in self.table:
                 
-                slot.append(t[index])
+                slot.append(s[index])
 
             array.append(slot)
 
-        self.assortment = ['rows' if self.assortment == 'columns' else 'columns']
+        self.grouping = ['rows' if self.grouping == 'columns' else 'columns']
 
         return array
 
@@ -89,33 +89,31 @@ class Table:
         width = []
         padding = 1
 
-        for index, t in enumerate(self.table):
-
-            width.append(len(max(t, key=len)))
+        [width.append(len(max(s, key=len))) for s in self.table]
 
         array = []
 
-        for t in self.table:
+        for s in self.table:
 
             slot = []
 
-            for index, element in enumerate(t):
+            for i, element in enumerate(s):
 
-                slot.append(element.ljust(width[index] + padding))
+                slot.append(element.ljust(width[i] + padding))
 
             array.append(slot)
 
-        for t in array:
+        for slot in array:
 
-            for index, element in enumerate(t):
+            for i, element in enumerate(slot):
 
-                if index < (len(t) - 1):
+                if i < (len(s) - 1):
 
-                    pair = t[index], t[index + 1]
+                    pair = slot[i], slot[i + 1]
 
                     try:
 
-                        char = str(list(self.separators[index].keys())[0])
+                        char = str(list(self.separators[i].keys())[0])
 
                     except:
 
@@ -123,7 +121,7 @@ class Table:
 
                     try:
 
-                        if not bool(self.separators[index].get(char)):
+                        if not bool(self.separators[i].get(char)):
 
                             string += (char + ' ').join(pair)
 
@@ -153,8 +151,4 @@ if __name__ == '__main__':
                 ['R3C1', 'R3C2', 'R3C3']]
 
     table = Table(my_table)
-    print(table())
-
-# error in align() function:
-#   separator ends vertically rather than horizontally
-#   add flip() functionality to make sauteing simpler
+    print(table)
