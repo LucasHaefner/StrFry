@@ -55,38 +55,29 @@ class Table:
         :retur:s string with left justified elements formatted with a separator
         """
         string = ''
-        width = []
-        padding = 1
-        [width.append(len(max(s, key=len))) for s in self.table]
+        margin = 1
+        padding = margin * ' '
         array = []
+        width = []
+        alignments = []
+
+        [alignments.append(bool(list(i.values())[0])) for i in self.separators]
+        [width.append(len(max(s, key=len))) for s in self.table]
 
         for s in self.table:
             slot = []
             for i, element in enumerate(s):
-                slot.append(element.ljust(width[i] + padding))
+                slot.append(element.ljust(width[i]))
             array.append(slot)
 
         for slot in array:
+            try:
+                char = str(list(self.separators[i].keys())[0])
+            except:
+                char = ' '
             for i, element in enumerate(slot):
-                # reference = iter(slot)
-                # pair = next(reference)
-                # print(pair)
-
-                # string += pair
-                if i < (len(s) - 1):
-                    pair = slot[i], slot[i + 1]
-                    try:
-                        char = str(list(self.separators[i].keys())[0])
-                    except:
-                        char = ''
-                    try:
-                        if not bool(self.separators[i].get(char)):
-                            string += (char + ' ').join(pair)
-                        else:
-                            string += (' ' + char).join(pair)
-                    except:
-                        string += ' '.join(pair)
-                string += '\n'
+                string += f'{element}{padding}{char}{padding}'
+            string += '\n'
         return string
 
     def __str__(self):
