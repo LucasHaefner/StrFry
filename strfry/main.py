@@ -1,13 +1,17 @@
 # ...StrFry/main.py
 
 class Table:
-    def __init__(self, table, separators=[':'], grouping='rows'):
+    def __init__(self, table, grouping='rows', separators=[':']):
         self.table = table
-        self.separators = separators
         self.grouping = grouping
+        self.separators = separators
         errors = {'grouping':f'Invalid groupinging key \'{self.grouping}\'. Use \'rows\' or \'columns\'.'}
         
-        if self.grouping != 'rows' and self.grouping != 'columns':
+        if self.grouping == 'rows':
+            pass
+        elif self.grouping == 'columns':
+            self.table = self.flip()
+        else:
             raise ValueError(errors[grouping])
 
     def normalize(self):
