@@ -21,8 +21,6 @@ class Table:
 
     @group.setter
     def group(self, group: Group):
-        # if group not in Group:
-        #     raise Exception
         self._group = group
 
     @property
