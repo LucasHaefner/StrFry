@@ -54,7 +54,7 @@ class Table:
         :return: string with left justified elements formatted with a divider
         """
         string = ''
-        array, width, alignments, chars = [], [], [], []
+        array, width, indentations, chars = [], [], [], []
         margin = 1
         padding = margin * ' '
 
@@ -64,10 +64,10 @@ class Table:
             chars.append(element)
 
             if element[0] == '>' and len(element) > 1:
-                alignments.append(True)
+                indentations.append(True)
                 chars[i] = element[1:]
             else:
-                alignments.append(False)
+                indentations.append(False)
 
         for s in self.table:
             slot = []
@@ -86,9 +86,9 @@ class Table:
                     char = ' '
 
                 try:
-                    if alignments[i]:
+                    if indentations[i]:
                         char += 2 * padding
-                    elif not alignments[i]:
+                    elif not indentations[i]:
                          char = f'{padding}{char}{padding}'
                 except:
                     char += padding
