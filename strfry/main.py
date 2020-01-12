@@ -1,15 +1,16 @@
-from enum import Enum, auto
+from enum import Enum, unique, auto
 
 class AutoName(Enum):
     def _generate_next_value(name, start, count, last_value):
         return False if bool(last_value) else True
 
+@unique
 class Group(AutoName):
     ROWS = auto()
     COLUMNS = auto()
 
 class Table:
-    def __init__(self, table, group: Group, divider=['>:', '|']):
+    def __init__(self, table, group: Group, divider=['|', '*']):
         self.table = table
         self.group = group
         self.divider = divider
@@ -24,6 +25,19 @@ class Table:
         #     raise Exception
         self._group = group
 
+    @property
+    def divider(self):
+        return self._divider
+
+    @divider.setter
+    def divider(self, divider=['|', '*']):
+        self._divider = divider
+        for i, element in enumerate(self._divider):
+            if element == '.++':
+                for _ in range(len(self._divider) - i):
+                    self._divider.insert(i, self._divider[i - 1])
+                return self._divider
+                
     def normalize(self):
         """
         Allows for text justification for table of non-string elements.
