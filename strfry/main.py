@@ -31,7 +31,7 @@ class Table:
     def divider(self, divider=['|', '*']):
         self._divider = divider
         for i, element in enumerate(self._divider):
-            if element == '.++':
+            if element == '*':
                 for _ in range(len(self._divider) - i):
                     self._divider.insert(i, self._divider[i - 1])
                 return self._divider
@@ -108,5 +108,4 @@ class Table:
 
     def __str__(self):
         table = self.normalize()
-        table = self.align()
-        return table
+        return self.align()
