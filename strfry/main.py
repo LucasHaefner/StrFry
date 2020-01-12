@@ -1,5 +1,3 @@
-# ...StrFry/strfry/main.py
-
 from enum import Enum, auto
 
 class AutoName(Enum):
