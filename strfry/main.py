@@ -1,7 +1,7 @@
 # ...StrFry/strfry/main.py
 
 class Table:
-    def __init__(self, table, grouping='rows', separators=['>:', ':', '|']):
+    def __init__(self, table, grouping='rows', separators=['>:', '|']):
         self.table = table
         self.grouping = grouping
         self.separators = separators
