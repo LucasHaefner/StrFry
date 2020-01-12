@@ -1,7 +1,7 @@
 # ...StrFry/strfry/main.py
 
 class Table:
-    def __init__(self, table, grouping='rows', separators=['>:']):
+    def __init__(self, table, grouping='rows', separators=['>:', ':', '|']):
         self.table = table
         self.grouping = grouping
         self.separators = separators
@@ -65,16 +65,19 @@ class Table:
 
         for slot in array:
             for i, element in enumerate(slot):
-                try:
-                    char = str(chars[i])
-                except:
+                if i < len(self.table) - 1:
+                    try:
+                        char = str(chars[i])
+                    except:
+                        pass
+                else:    
                     char = ' '
 
                 try:
                     if alignments[i]:
                         char += 2 * padding
                     elif not alignments[i]:
-                        char = f'{padding}{char}{padding}'
+                         char = f'{padding}{char}{padding}'
                 except:
                     char += padding
 
