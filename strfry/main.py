@@ -43,7 +43,6 @@ class Table:
             for e in s:
                 slot.append(e)
             array.append(slot)
-        self.grouping = ['rows' if self.grouping == 'columns' else 'columns']
         return array
 
     def align(self):
