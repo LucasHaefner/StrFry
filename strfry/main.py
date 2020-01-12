@@ -1,18 +1,30 @@
 # ...StrFry/strfry/main.py
 
+from enum import Enum, auto
+
+class AutoName(Enum):
+    def _generate_next_value(name, start, count, last_value):
+        return False if bool(last_value) else True
+
+class Group(AutoName):
+    ROWS = auto()
+    COLUMNS = auto()
+
 class Table:
-    def __init__(self, table, grouping='rows', separators=['>:', '|']):
+    def __init__(self, table, group: Group, divider=['>:', '|']):
         self.table = table
-        self.grouping = grouping
-        self.separators = separators
-        errors = {'grouping':f'Invalid groupinging key \'{self.grouping}\'. Use \'rows\' or \'columns\'.'}
-        
-        if self.grouping == 'rows':
-            pass
-        elif self.grouping == 'columns':
-            self.table = self.flip()
-        else:
-            raise ValueError(errors[grouping])
+        self.group = group
+        self.divider = divider
+
+    @property
+    def group(self):
+        return self._sort
+
+    @group.setter
+    def group(self, group: Group):
+        # if group not in Group:
+        #     raise Exception
+        self._group = group
 
     def normalize(self):
         """
@@ -38,8 +50,8 @@ class Table:
 
     def align(self):
         """
-        Adds text justification and character separator (if valid)
-        :return: string with left justified elements formatted with a separator
+        Adds text justification and divider
+        :return: string with left justified elements formatted with a divider
         """
         string = ''
         array, width, alignments, chars = [], [], [], []
@@ -48,7 +60,7 @@ class Table:
 
         [width.append(len(max(s, key=len))) for s in self.table]
 
-        for i, element in enumerate(self.separators):
+        for i, element in enumerate(self.divider):
             chars.append(element)
 
             if element[0] == '>' and len(element) > 1:
