@@ -9,7 +9,7 @@ def normalize(table):
 
 def flip(table):
     """
-    Switches table between grouping by lists of rows/lists of columns.
+    Switches table between grouping by lists of rows/lists of columns
     :return: list of lists of the nth element of each list in table
     """
     array = []
