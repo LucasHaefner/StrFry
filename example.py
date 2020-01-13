@@ -14,7 +14,7 @@ print(rows)
 
 print('Flipped:\n')
 print('DEBUG: ', rows_example)
-rows_example = rows.flip()
+rows_example = strfry.flip(rows_example)
 print('DEBUG: ', rows_example)
 print(rows)
 
@@ -24,6 +24,6 @@ print(columns)
 
 print('Flipped:\n')
 print('DEBUG: ', cols_example)
-cols_example = columns.flip()
+cols_example = strfry.flip(cols_example)
 print('DEBUG: ', cols_example)
 print(columns)
