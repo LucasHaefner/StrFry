@@ -1,1 +1,1 @@
-from strfry.main import Table
+from strfry.main import normalize, flip, align
