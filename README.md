@@ -1,6 +1,5 @@
 
-# StrFry
-### The easiest way to create human-readable tables in Python!
+# StrFry - The easiest way to create human-readable tables in Python!
 
 
 
