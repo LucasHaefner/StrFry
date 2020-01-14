@@ -9,21 +9,15 @@ cols_example = [['R1C1', 'R2C1', 'R3C1'],
             	['R1C3', 'R2C3', 'R3C3']]
 
 print('Rows:\n')
-rows = strfry.align(rows_example, 'ROWS')
-print(rows)
+print(strfry.align(rows_example, 'ROWS'))
 
 print('Flipped:\n')
-print('DEBUG: ', rows_example)
 rows_example = strfry.flip(rows_example)
-print('DEBUG: ', rows_example)
-print(rows)
+print(strfry.align(rows_example, 'ROWS'))
 
 print('Columns:\n')
-columns = strfry.align(cols_example, 'COLS')
-print(columns)
+print(strfry.align(cols_example, 'COLS'))
 
 print('Flipped:\n')
-print('DEBUG: ', cols_example)
 cols_example = strfry.flip(cols_example)
-print('DEBUG: ', cols_example)
-print(columns)
+print(strfry.align(cols_example, 'COLS'))
