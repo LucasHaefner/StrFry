@@ -2,19 +2,19 @@
 # StrFry - The easiest way to create human-readable tables in Python!
 
 # Overview
-Strfry allows users to manipulate tables, making them easier to read both for humans and machines.
+Strfry makes data easier to read by organizing it into table form.
 
 ## What is a table?
-A table is simply a iterable of one or more iterable. Lists are recommended, as most functions and methods won't work on immutables or non-iterables.
+A table is simply a iterable of one or more iterable. Lists are recommended, as some functions and methods may not work on immutables data types.
 
-# Class Heirarchy:
+# Classes:
 
+	- align()
 
-## Table
+# Functions:
 
 	- normalize()
 	- flip()
-	- align()
 
 ## ...More being added!
 

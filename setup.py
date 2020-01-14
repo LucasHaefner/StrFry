@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
   name = 'StrFry',
-  version = '0.0.1',
+  version = '1.0.0',
   license='MIT',
   description = 'The easiest way to create human-readable tables in Python!',
   long_description = long_description,
@@ -14,11 +14,11 @@ setuptools.setup(
   author_email = 'lucashaefner360@gmail.com',
   url = 'https://github.com/LucasHaefner/StrFry',
   download_url = 'https://github.com/LucasHaefner/StrFry/archive/v_0.0.1.tar.gz',
-  keywords = ['String', 'Str', 'Dunder', 'Special Method', 'Table', 'Tables', 'Data'],
+  keywords = ['String', 'Str', 'Dunder', 'Special Method', 'Table', 'Tables', 'Data', 'List', 'Iterable'],
   packages = setuptools.find_packages(),
   classifiers=[
     'Programming Language :: Python :: 3',
-    'Development Status :: 3 - Alpha',
+    'Development Status :: 3 - Beta',
     'Intended Audience :: Developers',
     'Topic :: Software Development :: Build Tools',
     'License :: OSI Approved :: MIT License',
