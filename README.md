@@ -2,6 +2,8 @@
 # StrFry
 ### The easiest way to create human-readable tables in Python!
 
+
+
 ## Overview
 Strfry makes data easier to read by organizing it into table form.
 
