@@ -13,7 +13,7 @@ setuptools.setup(
   author = 'Lucas Haefner',
   author_email = 'lucashaefner360@gmail.com',
   url = 'https://github.com/LucasHaefner/StrFry',
-  download_url = 'https://github.com/LucasHaefner/StrFry/archive/v_0.0.1.tar.gz',
+  download_url = 'https://github.com/LucasHaefner/StrFry/archive/v1.0.0.tar.gz',
   keywords = ['String', 'Str', 'Dunder', 'Special Method', 'Table', 'Tables', 'Data', 'List', 'Iterable'],
   packages = setuptools.find_packages(),
   classifiers=[
@@ -24,5 +24,5 @@ setuptools.setup(
     'License :: OSI Approved :: MIT License',
     'Operating System :: OS Independent',
   ],
-  python_requires='>=3.6',
+  python_requires='>=3.0',
 )
